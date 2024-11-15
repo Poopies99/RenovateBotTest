@@ -1,5 +1,5 @@
 # Use a Python image with a known critical CVE
-FROM python@sha256:bdbb6b755f9983e2e8cd77253d78053d2e4b45f60e62dc0325d3a132891345f7
+FROM python@sha256:bc78d3c007f86dbb87d711b8b082d9d564b8025487e780d24ccb8581d83ef8b0
 
 # Set working directory
 WORKDIR /app
