@@ -1,3 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk@sha256:8d1440b4a6fed0d1de3f5ac758672cab9035c2cf39db37cd2dd39b1a184c6106 AS build
-COPY . Src
-WORKDIR /Src
+# Use a Python image with a known critical CVE
+FROM python@sha256:bdbb6b755f9983e2e8cd77253d78053d2e4b45f60e62dc0325d3a132891345f7
+
+# Set working directory
+WORKDIR /app
+
+# Copy application files
+COPY . .
+
+# Install dependencies
+RUN pip install -r requirements.txt
+
+# Expose the application port (example)
+EXPOSE 5000
+
+# Run the application
+CMD ["python", "app.py"]
