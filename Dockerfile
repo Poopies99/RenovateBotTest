@@ -1,2 +1,2 @@
-FROM node:14.15.1@sha256:e4f5095aeca472b3c10dc27bb40e33a3d4ec2c12162f1ad390d894b1a53ffdee AS build
+FROM node:14.21.3@sha256:a158d3b9b4e3fa813fa6c8c590b8f0a860e015ad4e59bbce5744d2f6fd8461aa AS build
 
