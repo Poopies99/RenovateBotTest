@@ -32,9 +32,11 @@
         "node"
       ],
       "enabled": true,
-      "versioning": "major",
+      "matchUpdateTypes": [
+        "major"
+      ],
       "commitMessageTopic": "Node.js image updates",
-      "description": "Recommends major patching for Node.js images when CVEs are detected"
+      "description": "Recommends major updates for Node.js images when CVEs are detected"
     }
   ]
 }
