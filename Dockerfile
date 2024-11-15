@@ -1,20 +1,3 @@
-# Use an older base image with known vulnerabilities
-FROM node:14.17.0-slim
-
-# Install some packages (optional, for example purposes)
-RUN apt-get update && apt-get install -y curl
-
-# Set a working directory
-WORKDIR /app
-
-# Copy a sample application code (optional, for example purposes)
-COPY . .
-
-# Install dependencies (this will depend on your actual project)
-RUN npm install
-
-# Expose the application port (example port)
-EXPOSE 3000
-
-# Start the application (assuming an app.js file)
-CMD ["node", "app.js"]
+FROM mcr.microsoft.com/dotnet/sdk@sha256:8d1440b4a6fed0d1de3f5ac758672cab9035c2cf39db37cd2dd39b1a184c6106 AS build
+COPY . Src
+WORKDIR /Src
