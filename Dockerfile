@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk@sha256:8d1440b4a6fed0d1de3f5ac758672cab9035c2cf39db37cd2dd39b1a184c6106 AS build
+FROM mcr.microsoft.com/dotnet/sdk@sha256:7d24e90a392e88eb56093e4eb325ff883ad609382a55d42f17fd557b997022ca AS build
 
 # Set the working directory
 WORKDIR /app
