@@ -1,16 +1,31 @@
 {
-  "extends": ["config:base"],
-  "docker": {
-    "enabled": true
-  },
+  "extends": [
+    "config:recommended"
+  ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["major", "minor", "patch", "digest"],
+      "matchCategories": [
+        "docker"
+      ],
+      "enabled": true
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "digest"
+      ],
       "automerge": false,
       "commitMessageTopic": "Docker image updates",
       "description": "Updates Docker base images to fix vulnerabilities",
-      "labels": ["security", "critical"]
+      "labels": [
+        "security",
+        "critical"
+      ]
     }
   ]
 }
