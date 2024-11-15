@@ -26,6 +26,16 @@
         "security",
         "critical"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "node"
+      ],
+      "matchVersioning": "semver",
+      "enabled": true,
+      "versioning": "major",
+      "commitMessageTopic": "Node.js image updates",
+      "description": "Recommends major patching for Node.js images when CVEs are detected"
     }
   ]
 }
