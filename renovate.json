@@ -31,7 +31,6 @@
       "matchPackageNames": [
         "node"
       ],
-      "matchVersioning": "semver",
       "enabled": true,
       "versioning": "major",
       "commitMessageTopic": "Node.js image updates",
