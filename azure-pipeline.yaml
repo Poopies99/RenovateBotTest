@@ -1,0 +1,70 @@
+trigger: none
+
+schedules:
+- cron: '0 1 * * 3'
+  displayName: Every Wednesday 9AM Run
+  branches:
+    include:
+    # - main
+    # - main-renovate
+    - SonarQube-Upgrade-Automation
+  always: true
+
+variables:
+  - name: agentpool
+    value: 'wds-cicd-nprd'
+  - name: renovateBranches
+    # value: 'main-renovate'
+    value: SonarQube-Upgrade-Automation
+
+stages:
+  - stage: CheckDependencies
+    displayName: 'Check Dependencies'
+
+    jobs:
+      - job: Renovatebot
+        displayName: 'Run Renovatebot'
+        pool:
+          name: $(agentpool) # Only Ubuntu and MacOS is supported at this time
+          demands:
+            - jdk17-large
+        steps:
+          - checkout: self
+            persistCredentials: true
+            fetchDepth: 1
+            clean: "true"
+
+          - task: Bash@3
+            displayName: ACR Login
+            inputs:
+              targetType: 'inline'
+              script: |
+                echo "Login ACR"
+                az login --federated-token "$(cat $AZURE_FEDERATED_TOKEN_FILE)" --service-principal -u 3c576c24-6f88-40e3-9d3a-b9f991111c53 -t db5e17b0-dc06-468e-a1ca-956f989dfdd2
+                az account set -s 105d9fb6-77b6-48d8-9abc-ba4bfc9d34ba
+                output=$(az acr login -n acrwdsmgdevdznadzacr001 --expose-token -o json)
+
+                # Extract accessToken and loginServer using jq
+                accessToken=$(echo $output | jq -r '.accessToken')
+                loginServer=$(echo $output | jq -r '.loginServer')
+                echo "##vso[task.setvariable variable=accessToken]$accessToken"
+                echo "##vso[task.setvariable variable=loginServer]$loginServer"
+
+          - task: NodeTool@0
+            displayName: 'Renovate Bot'
+            inputs:
+              versionSpec: ">=20.15.1"
+          - bash: |
+              git config --global user.email "Website_Build_Service@cpf.gov.sg"
+              git config --global user.name "Website Build Service (CPFB)"
+              echo $(loginServer)
+              npx --yes --package renovate -- renovate-config-validator
+              npx renovate $(System.TeamProject)/$(Build.Repository.Name) --base-branch=SonarQube-Upgrade-Automation
+            env:
+              LOG_LEVEL: debug
+              RENOVATE_PLATFORM: azure
+              RENOVATE_ENDPOINT: $(System.CollectionUri)
+              RENOVATE_TOKEN: $(System.AccessToken)
+              RENOVATE_HOST_RULES: '[{"hostType":"docker","matchHost":"$(loginServer)","username":"00000000-0000-0000-0000-000000000000","password":"$(accessToken)"}]'
+              RENOVATE_AUTOMERGE: false
+              RENOVATE_PLATFORM_AUTOMERGE: false
