@@ -1,5 +1,5 @@
 # Use the official Microsoft OpenJDK image as the base
-FROM node:14.15.1@sha256:e4f5095aeca472b3c10dc27bb40e33a3d4ec2c12162f1ad390d894b1a53ffdee AS build
+FROM node:14.15.1@sha256:9201f75428d698da44d4d988ba20be75a1ecc2fa7084ae34e879c87bec89b1dd AS build
 
 
 # Set the working directory inside the container
