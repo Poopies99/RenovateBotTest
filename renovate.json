@@ -2,15 +2,49 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "enabledManagers": ["dockerfile", "helm-values"],
   "enabled": true,
-  "extends": ["config:best-practices"],
+  "extends": ["config:recommended"],
   "baseBranches": ["main"],
-  "includePaths": ["/sonarqube/"],
   "gitAuthor": "Website Build Service (CPFB) <Website_Build_Service@cpf.gov.sg>",
   "timezone": "Asia/Singapore",
   "packageRules": [
       {
           "matchManagers": ["helm-values"],
           "groupName": "Helm"
+      },
+      {
+        "matchCategories": [
+          "docker"
+        ],
+        "enabled": true
+      },
+      {
+        "matchDatasources": [
+          "docker"
+        ],
+        "matchUpdateTypes": [
+          "major",
+          "minor",
+          "patch",
+          "digest"
+        ],
+        "automerge": false,
+        "commitMessageTopic": "Docker image updates",
+        "description": "Updates Docker base images to fix vulnerabilities",
+        "labels": [
+          "security",
+          "critical"
+        ]
+      },
+      {
+        "matchPackageNames": [
+          "node"
+        ],
+        "enabled": true,
+        "matchUpdateTypes": [
+          "major"
+        ],
+        "commitMessageTopic": "Node.js image updates",
+        "description": "Recommends major updates for Node.js images when CVEs are detected"
       }
   ]
 }
