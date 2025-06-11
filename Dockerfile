@@ -1,5 +1,6 @@
 # Use the official Microsoft OpenJDK image as the base
-FROM mcr.microsoft.com/openjdk/jdk:17-mariner
+FROM node:14.15.1@sha256:e4f5095aeca472b3c10dc27bb40e33a3d4ec2c12162f1ad390d894b1a53ffdee AS build
+
 
 # Set the working directory inside the container
 WORKDIR /build
