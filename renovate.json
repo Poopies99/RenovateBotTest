@@ -1,7 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "enabledManagers": ["helm-values", "helmfile", "dockerfile"],
-  "extends": ["config:best-practices"],
+  "enabledManagers": [
+    "helm-values",
+    "helmfile",
+    "dockerfile"
+  ],
+  "extends": [
+    "config:best-practices"
+  ],
   "includePaths": [
     "/sonarqube/Chart.yaml",
     "/sonarqube/charts/",
@@ -10,21 +16,30 @@
   ],
   "packageRules": [
     {
-      "matchManagers": ["helm-values"],
+      "matchManagers": [
+        "helm-values"
+      ],
       "groupName": "SonarQube Helm"
     },
     {
-      "matchManagers": ["dockerfile"],
+      "matchManagers": [
+        "dockerfile"
+      ],
       "groupName": "SonarQube Helm"
     },
     {
-      "matchManagers": ["helmfile"],
+      "matchManagers": [
+        "helmfile"
+      ],
       "groupName": "SonarQube Helm"
     }
   ],
-  "labels": ["dependencies", "renovate"],
+  "labels": [
+    "dependencies",
+    "renovate"
+  ],
   "prHourlyLimit": 2,
   "prConcurrentLimit": 5,
   "onboarding": true,
-  "requireConfig": true
+  "requireConfig": "required"
 }
