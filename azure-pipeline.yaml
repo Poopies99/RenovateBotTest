@@ -59,7 +59,7 @@ stages:
               git config --global user.name "Website Build Service (CPFB)"
               echo $(loginServer)
               npx --yes --package renovate -- renovate-config-validator
-              npx renovate $(System.TeamProject)/$(Build.Repository.Name) --base-branch=SonarQube-Upgrade-Automation
+              npx renovate $(System.TeamProject)/$(Build.Repository.Name)
             env:
               LOG_LEVEL: debug
               RENOVATE_PLATFORM: azure
