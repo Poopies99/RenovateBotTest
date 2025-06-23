@@ -11,19 +11,19 @@
   "packageRules": [
     {
       "matchManagers": ["helm-values"],
-      "groupName": "Helm Values Images"
+      "groupName": "SonarQube Helm"
     },
     {
       "matchManagers": ["dockerfile"],
-      "groupName": "Docker Images"
+      "groupName": "SonarQube Helm"
     },
     {
       "matchManagers": ["helmfile"],
-      "groupName": "Helmfile Dependencies"
+      "groupName": "SonarQube Helm"
     }
   ],
   "labels": ["dependencies", "renovate"],
-  "prHourlyLimit": 20,
+  "prHourlyLimit": 2,
   "prConcurrentLimit": 5,
   "onboarding": true,
   "requireConfig": true
